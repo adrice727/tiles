@@ -4,6 +4,7 @@ const runTiles = () => {
   const $tiles = (() => {
     const el = document.createElement('div');
     el.id = 'tiles';
+    el.style.width = '100vw';
     return el;
   })();
 
@@ -14,31 +15,27 @@ const runTiles = () => {
   const tileRows = [];
 
   const colors = [
-    '#e4ff00',
-    '#fae700',
-    '#62c3be',
-    '#31c6ff',
-    '#6dc563',
-    '#88ffb8',
-    '#259686'
-  ];
+    '#edc23c',
+    '#36d9cc',
+    '#cbe446',
+    '#04a085',
+    '#f2ede3',
+    '#fdd419',
+  ]
 
   const setTileSize = () => {
-  tileSize = `${window.innerWidth / TILES_PER_ROW}px`;
-  }
-
+    tileSize = `${window.innerWidth / TILES_PER_ROW}px`;
+  };
 
   const randomColor = (row, column) => {
-    // const hasColor = (1.0 - (.10 * (((row + 1) * (column + 1) / TILES_PER_ROW * TILES_PER_ROW)))) > .25;
     const hasColor =
       (Math.random() * (1.0 - (.50 * (((row + 1) * (column + 1) / TOTAL_TILES))))) > .5;
-
-    // Math.random() * (2 * (.10 * (((row + 1) * (column + 1) / TILES_PER_ROW * TILES_PER_ROW) )
     return hasColor ? colors[(Math.random() * colors.length) | 0] : 'white';
-  }
+  };
+
   const randomOpacity = (row, column) => {
     const adjustment = ((Math.random() * 30) * ((row + 1) * (column + 1)) / TOTAL_TILES);
-    return .75 - adjustment;
+    return .45 - adjustment;
   }
   const buildTile = (row, column) => {
     const el = document.createElement('div');
@@ -47,9 +44,10 @@ const runTiles = () => {
     el.style.opacity = randomOpacity(row, column);
     el.style.height = tileSize;
     el.style.width = tileSize;
+    el.style.float = 'left';
+    el.style.transition = 'all 2.0s cubic-bezier(0.47, 0, 0.75, 0.72)';
     return el;
-  }
-
+  };
 
   const buildTiles = () => {
     setTileSize();
@@ -63,7 +61,7 @@ const runTiles = () => {
       tileRows.push(row);
     }
     $body.append($tiles);
-  }
+  };
 
   const updateColors = () => {
     tileRows.forEach((row, rowIndex) => {
