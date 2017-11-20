@@ -1,0 +1,13 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#tiles {
+	width: 100vw
+}
+
+.tile {
+	float: left;
+	transition: all 2.0s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
